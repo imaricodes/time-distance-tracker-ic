@@ -2,9 +2,9 @@
 import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 
-export const metadata = {
-  title: "Home Page",
-};
+// export const metadata = {
+//   title: "Home Page",
+// };
 
 export default function Home() {
   const [users, setUsers] = useState([]);
