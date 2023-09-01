@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import MessageList from "../components/MessageList";
 
-export const metadata = {
-  title: "Register User",
-};
+// export const metadata = {
+//   title: "Register User",
+// };
 
 export default function RegisterUserPage() {
   const [errMsgs, setErrMsgs] = useState(null);
