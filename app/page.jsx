@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import styles from "./page.module.css";
 
 // export const metadata = {
 //   title: "Home Page",
@@ -11,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("api/get-users");
+      const res = await fetch("api/get-users", { cache: "no-store" });
       const data = await res.json();
       console.log("I am Data");
       console.log(data);
@@ -21,34 +20,16 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={styles.main}>
-      <h1>Time Distance Tracker</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>email</th>
-            <th>Password</th>
-            <th>Third Party Auth</th>
-            <th>Create At</th>
-            <th>Updated On</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users?.map((user) => (
-            <tr key={user.id}>
-              <td>{user.first_name}</td>
-              <td>{user.last_name}</td>
-              <td>{user.email}</td>
-              <td>{user.password}</td>
-              <td>{user.third_party_auth}</td>
-              <td>{user.created_at}</td>
-              <td>{user.update_at}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <main className="flex flex-col items-center min-h-screen">
+      <h1 className="text-4xl font-bold text-primary mb-4 mt-12">
+        Simply Track Miles
+      </h1>
+      <p className="text-lg border border-primary-light p-4 rounded-lg max-w-screen-md text-center">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
+        molestiae odit odio tempora assumenda dignissimos numquam debitis quos
+        fugiat repellendus, nesciunt fugit exercitationem nemo rem neque quae
+        ratione, qui laborum?
+      </p>
     </main>
   );
 }
