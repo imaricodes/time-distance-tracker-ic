@@ -1,4 +1,4 @@
-import { pool } from "../../../models/dbConfig.js";
+import { pool } from "models/dbconfig";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server.js";
 import validator from "email-validator";

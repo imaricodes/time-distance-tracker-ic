@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import pool from "../../../models/dbconfig.js";
+import { pool } from "models/dbconfig";
 
 /*
 This route is called to get all of the users from the user_profiles table
