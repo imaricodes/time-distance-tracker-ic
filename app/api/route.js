@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import pool from "../../../models/dbconfig.js";
+import pool from "models/dbconfig.js";
 
 /*
 This route is called to get all trips by user by date range
