@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DateRow from "./DateRow";
 import { tripsData } from "./tripsData";
 import { TripContextProvider } from "../contexts/TripContext";
@@ -27,18 +27,41 @@ function getDaysForMonth(monthNumber, year) {
   return datesArray;
 }
 
-async function getUserTrips() {
-  const res = await fetch("api/user-trips", { cache: "no-store" });
-  const userTrips = await res.json();
-  console.log(userTrips);
-}
-
 export default function Month() {
-  // trips will be an array of objects how all trips for given month
-  const [trips, setStrips] = useState(tripsData);
+  const [trips, setTrips] = useState(null);
+
+  useEffect(() => {
+    async function fetchTrips() {
+      try {
+        const res = await fetch("api/get-trips", { cache: "no-store" });
+        const userTrips = await res.json();
+        setTrips(userTrips);
+        console.log(trips);
+      } catch (error) {
+        console.error("Error fetching trips:", error);
+      }
+    }
+
+    fetchTrips();
+  }, []);
+
   const days = getDaysForMonth(8, 2023);
-  const data = getUserTrips();
-  console.log(data);
+
+  function extractDayOfMonth(obj) {
+    if (obj && obj.start_date) {
+      // Split the date string by '-' to get the year, month, and day parts
+      const dateParts = obj.start_date.split("-");
+
+      if (dateParts.length === 3) {
+        // Parse the day part and return it as an integer
+        const dayOfMonth = parseInt(dateParts[2], 10);
+        return dayOfMonth;
+      }
+    }
+    // Return null if the date format is invalid or if the object is null/undefined
+    return null;
+  }
+
   return (
     <TripContextProvider>
       <div className="px-20">
@@ -50,18 +73,22 @@ export default function Month() {
             AUGUST
           </button>
         </div>
+        {trips !== null &&
+          days.map((day, index) => {
+            const currentTrips = trips.filter((trip) => {
+              const tripDay = extractDayOfMonth(trip);
+              return tripDay === day;
+            });
 
-        {days.map((item, index) => {
-          const currentTrips = trips.filter((trip) => {
-            return trip.date === item;
-          });
-
-          return (
-            <div className="bg-blue-100 w-full border-8 px-4 py-4" key={index}>
-              <DateRow date={item} tripsData={currentTrips} />
-            </div>
-          );
-        })}
+            return (
+              <div
+                className="bg-blue-100 w-full border-8 px-4 py-4"
+                key={index}
+              >
+                <DateRow date={day} tripsData={currentTrips} />
+              </div>
+            );
+          })}
       </div>
     </TripContextProvider>
   );
