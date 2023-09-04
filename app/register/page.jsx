@@ -5,10 +5,6 @@ import RegisterForm from "./RegisterForm";
 import MessageList from "../components/MessageList";
 import { useState } from "react";
 
-// export const metadata = {
-//   title: "Register User",
-// };
-
 export default function RegisterUserPage() {
   const [errMsgs, setErrMsgs] = useState(null);
   const router = useRouter();
