@@ -27,11 +27,18 @@ function getDaysForMonth(monthNumber, year) {
   return datesArray;
 }
 
+async function getUserTrips() {
+  const res = await fetch("api/user-trips", { cache: "no-store" });
+  const userTrips = await res.json();
+  console.log(userTrips);
+}
+
 export default function Month() {
   // trips will be an array of objects how all trips for given month
   const [trips, setStrips] = useState(tripsData);
   const days = getDaysForMonth(8, 2023);
-  console.log(days);
+  const data = getUserTrips();
+  console.log(data);
   return (
     <TripContextProvider>
       <div className="px-20">

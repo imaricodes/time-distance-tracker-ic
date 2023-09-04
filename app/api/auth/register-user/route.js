@@ -48,6 +48,7 @@ export async function POST(request) {
     const jsonString = JSON.stringify(errors);
     return new NextResponse(jsonString, { status: 422 });
   }
+
   const hashedPassword = await bcrypt.hash(password, 10);
   const registerNewUser = {
     text: `INSERT INTO user_profiles (first_name, last_name, user_name_email, pass)
