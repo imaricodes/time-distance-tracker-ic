@@ -10,8 +10,8 @@ export default function Trip({ tripData }) {
         onClick={() => handleSetOpenTrip(tripData.id)}
         className="flex gap-10 h-10 items-center px-3 cursor-pointer "
       >
-        <p>{tripData.id}</p>|<p>{tripData.origin_addr_id}</p> |
-        <p>{tripData.destination_addr_id}</p>
+        <p>{tripData.id}</p>|<p>{tripData.origin_location.location_name}</p> |
+        <p>{tripData.destination_location.location_name}</p>
       </div>
     );
   };

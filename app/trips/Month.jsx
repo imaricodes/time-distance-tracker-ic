@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import DateRow from "./DateRow";
-import { tripsData } from "./tripsData";
 import { TripContextProvider } from "../contexts/TripContext";
 
 /* This function takes an integer value between 1 - 12 monthNumber 
